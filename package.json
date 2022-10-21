@@ -1,8 +1,7 @@
 {
-  "name": "orgchem_chemeq",
+  "name": "Biology Revision",
   "version": "1.0.0",
-  "description": "Organic Chemistry Equations Exercise",
-  "main": "cookies.js",
+  "description": "Biology Revision",
   "scripts": {
     "build": "rm -r docs & node preprocess.js --minify",
     "dev": "concurrently --kill-others \"cd docs && live-server --no-browser\" \"when-changed -r src node preprocess.js --development\"",
@@ -11,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/veehz/orgchem_eq_exercise.git"
+    "url": "git+https://github.com/veehz/bio.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/veehz/orgchem_eq_exercise/issues"
+    "url": "https://github.com/veehz/bio/issues"
   },
-  "homepage": "https://github.com/veehz/orgchem_eq_exercise#readme",
+  "homepage": "https://github.com/veehz/bio#readme",
   "dependencies": {
     "concurrently": "^7.4.0",
     "gh-pages": "^4.0.0",
