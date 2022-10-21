@@ -1,0 +1,85 @@
+<!-- @if PRODUCTION --><link rel="manifest" href="/chem/manifest.json" /><!-- @endif -->
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        font-family: 'Hiragino Kaku Gothic Pro', 'WenQuanYi Zen Hei',
+        '微軟正黑體', '蘋果儷中黑', Helvetica, Arial, sans-serif;
+    }
+
+    main {
+        text-align: center;
+    }
+
+    .pretty-button {
+        border-radius: 0.5rem;
+        border: none;
+        padding: 0.25rem;
+        background-color: #f0f0f0;
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .full-width {
+        width: 65ch;
+        max-width: 100%;
+    }
+
+    .full-linked-button {
+        width: 65ch;
+        max-width: 100%;
+        border-radius: 0.5rem;
+        border: none;
+        padding: 0.25rem;
+        background-color: #f0f0f0;
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+</style>
+
+<!-- @if PRODUCTION -->
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ESQYE2ECNB"></script>
+<script>
+    if (!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-ESQYE2ECNB', { 'site_speed_sample_rate': 100 });
+    }
+</script>
+
+<!-- Quicklink -->
+<script defer src="https://unpkg.com/quicklink@2.3.0/dist/quicklink.umd.js"></script>
+<script defer src="data:text/javascript,quicklink.listen()"></script>
+<!-- @endif -->
+
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+        const backButton = document.createElement("div");
+        backButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="m12 20-8-8 8-8 1.425 1.4-5.6 5.6H20v2H7.825l5.6 5.6Z"/></svg>`;
+        backButton.style.position = "fixed";
+        backButton.style.top = ".25rem";
+        backButton.style.left = ".25rem";
+        backButton.style.cursor = "pointer";
+        backButton.id = "backbutton";
+        backButton.addEventListener("click", function () {
+            window.location.href = (window.location.href.split("/").slice(0, -2).join("/") + "/");
+        });
+        document.body.appendChild(backButton);
+    });
+</script>
+
+<!-- @if PRODUCTION -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- @endif -->

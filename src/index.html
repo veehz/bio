@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- @include $lib/header.html -->
+    <title>生物复习</title>
+</head>
+
+<body>
+    <main>
+        <h1>生物复习</h1>
+
+        <style>
+            footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                padding-bottom: 1rem;
+                font-size: small;
+            }
+
+        </style>
+        <footer>
+            Last updated on
+            <!-- @exec time() -->.<br>
+            Code available on <a href="https://github.com/veehz/bio" target="_blank">GitHub</a>.
+        </footer>
+    </main>
+</body>
+
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("backbutton").style.display = "none";
+    })
+</script>
+
+</html>
