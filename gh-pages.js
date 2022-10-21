@@ -4,7 +4,7 @@ ghpages.publish(
   "docs",
   {
     branch: "gh-pages",
-    repo: "git@github.com:veehz/chem.git",
+    repo: "git@github.com:veehz/bio.git",
     message: 'Auto-generated commit',
     dotfiles: true
   },
