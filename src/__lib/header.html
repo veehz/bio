@@ -49,6 +49,7 @@
         padding-bottom: 1rem;
         font-size: small;
     }
+
 </style>
 
 <!-- @if PRODUCTION -->
@@ -68,14 +69,26 @@
 <script defer src="data:text/javascript,quicklink.listen()"></script>
 <!-- @endif -->
 
+<style>
+    #backbutton {
+        position: fixed;
+        top: .25em;
+        left: .25rem;
+        cursor: pointer;
+    }
+
+    @media print {
+        #backbutton {
+            display: none;
+        }
+    }
+
+</style>
+
 <script>
     window.addEventListener("DOMContentLoaded", function () {
         const backButton = document.createElement("div");
-        backButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="m12 20-8-8 8-8 1.425 1.4-5.6 5.6H20v2H7.825l5.6 5.6Z"/></svg>`;
-        backButton.style.position = "fixed";
-        backButton.style.top = ".25rem";
-        backButton.style.left = ".25rem";
-        backButton.style.cursor = "pointer";
+        backButton.innerHTML = `<!-- @include ./svg/arrow_back.svg -->`;
         backButton.id = "backbutton";
         backButton.addEventListener("click", function () {
             window.location.href = (window.location.href.split("/").slice(0, -2).join("/") + "/");
