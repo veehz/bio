@@ -69,6 +69,7 @@
 <script defer src="data:text/javascript,quicklink.listen()"></script>
 <!-- @endif -->
 
+<!-- @ifndef noBackButton -->
 <style>
     #backbutton {
         position: fixed;
@@ -96,6 +97,11 @@
         document.body.appendChild(backButton);
     });
 </script>
+<!-- @endif -->
+
+<!-- @ifndef noBackToTop -->
+<!-- @include backToTop.html -->
+<!-- @endif -->
 
 <!-- @if PRODUCTION -->
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
