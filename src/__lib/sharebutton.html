@@ -1,0 +1,35 @@
+<!-- not used, may use in the future -->
+<style>
+    #sharebutton {
+        position: fixed;
+        top: .25em;
+        right: .25rem;
+        cursor: pointer;
+    }
+
+    @media print {
+        #sharebutton {
+            display: none;
+        }
+    }
+
+</style>
+
+<script>
+    if (navigator.share) {
+        window.addEventListener("DOMContentLoaded", function () {
+            const shareButton = document.createElement("div");
+            shareButton.innerHTML = `<!-- @include ./svg/share.svg -->`;
+            shareButton.id = "sharebutton";
+            shareButton.addEventListener("click", function () {
+                navigator.share({
+                    title: document.title,
+                    url: window.location.href
+                }).then(() => {
+                    console.log('Thanks for sharing!');
+                }).catch(console.error);
+            });
+            document.body.appendChild(shareButton);
+        });
+    }
+</script>
