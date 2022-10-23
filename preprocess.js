@@ -118,7 +118,6 @@ async function processFile(file) {
       srcDir,
     }
   );
-
   if (processed.includes("<!-- @prerender_katex -->")) {
     // remove "<!-- @prerender_katex -->"
     processed = processed.replace("<!-- @prerender_katex -->", "");
@@ -154,6 +153,20 @@ async function processFile(file) {
     });
   }
 
+  // replacement
+  const replaces = [[`<tree>`, `<div id="tree">`],
+                    [`</tree>`, `</div>`],
+                    [/<entry\s*(.*?)\s*>/gm, `<div class="entry"><span>$1</span>`],
+                    [`</entry>`, `</div>`],
+                    [`<sentry>`, `<div class="entry"><span>`],
+                    [`</sentry>`, `</span></div>`],
+                    [`<branch>`, `<div class="branch">`],
+                    [`</branch>`, `</div>`]]
+  for (let i = 0; i < replaces.length; i++) {
+    processed = processed.replaceAll(replaces[i][0], replaces[i][1]);
+  }
+
+  // minify
   const dest = path.join(DEST, path.relative(SOURCE, file));
 
   if (options.minify && dest.endsWith(".html")) {

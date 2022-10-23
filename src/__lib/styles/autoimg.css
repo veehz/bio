@@ -1,5 +1,5 @@
 .autoimg {
   object-fit: contain;
-  width: 100vw;
-  max-width: 65ch;
+  width: 65ch;
+  max-width: 100%;
 }
