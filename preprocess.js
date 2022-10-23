@@ -6,6 +6,7 @@ const path = require("path");
 const options = {
   minify: process.argv.includes("--minify"),
   development: process.argv.includes("--development"),
+  prefetch: process.argv.includes("--prefetch"),
 };
 
 options.production = !options.development;
@@ -90,9 +91,24 @@ async function processFile(file) {
         if (href.startsWith("http")) {
           return `<a href="${href}" target="_blank"><button class="full-linked-button">${text}</button></a><br/>`;
         }
+
+        const prefetch = [];
+        const realHrefDir = path.normalize(path.join(srcDir, href));
+        if (options.prefetch && fs.existsSync(path.join(realHrefDir, "img"))) {
+          const imgs = fs.readdirSync(path.join(realHrefDir, "img"));
+          for (const img of imgs) {
+            prefetch.push(
+              `<link rel="prefetch" href="${path.relative(
+                srcDir,
+                path.join(realHrefDir, "img", img)
+              )}">`
+            );
+          }
+        }
+
         const needTrailingSlash =
           !href.endsWith("/") && !href.split("/").pop().includes(".");
-        return `<a href="${href}${
+        return `${prefetch.join("")}<a href="${href}${
           needTrailingSlash ? "/" : ""
         }"><button class="full-linked-button">${text}</button></a><br/>`;
       },
@@ -154,14 +170,16 @@ async function processFile(file) {
   }
 
   // replacement
-  const replaces = [[`<tree>`, `<div id="tree">`],
-                    [`</tree>`, `</div>`],
-                    [/<entry\s*(.*?)\s*>/gm, `<div class="entry"><span>$1</span>`],
-                    [`</entry>`, `</div>`],
-                    [`<sentry>`, `<div class="entry"><span>`],
-                    [`</sentry>`, `</span></div>`],
-                    [`<branch>`, `<div class="branch">`],
-                    [`</branch>`, `</div>`]]
+  const replaces = [
+    [`<tree>`, `<div id="tree">`],
+    [`</tree>`, `</div>`],
+    [/<entry\s*(.*?)\s*>/gm, `<div class="entry"><span>$1</span>`],
+    [`</entry>`, `</div>`],
+    [`<sentry>`, `<div class="entry"><span>`],
+    [`</sentry>`, `</span></div>`],
+    [`<branch>`, `<div class="branch">`],
+    [`</branch>`, `</div>`],
+  ];
   for (let i = 0; i < replaces.length; i++) {
     processed = processed.replaceAll(replaces[i][0], replaces[i][1]);
   }

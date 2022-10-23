@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Biology Revision",
   "scripts": {
-    "build": "rm -r docs & node preprocess.js --minify",
-    "dev": "concurrently --kill-others \"cd docs && live-server --no-browser\" \"when-changed -r src node preprocess.js --development\"",
+    "build": "rm -r docs & node preprocess.js --minify --prefetch",
+    "dev": "concurrently --kill-others \"cd docs && live-server --no-browser\" \"when-changed -r src node preprocess.js --development --prefetch\"",
     "preview": "cd docs && live-server",
     "deploy": "npm run build && node gh-pages.js"
   },
