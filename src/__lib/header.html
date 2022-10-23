@@ -83,7 +83,6 @@
         position: fixed;
         top: .25em;
         left: .25rem;
-        cursor: pointer;
     }
 
     @media print {
@@ -96,12 +95,10 @@
 
 <script>
     window.addEventListener("DOMContentLoaded", function () {
-        const backButton = document.createElement("div");
+        const backButton = document.createElement("a");
         backButton.innerHTML = `<!-- @include ./svg/arrow_back.svg -->`;
         backButton.id = "backbutton";
-        backButton.addEventListener("click", function () {
-            window.location.href = (window.location.href.split("/").slice(0, -2).join("/") + "/");
-        });
+        backButton.href = "../";
         document.body.appendChild(backButton);
     });
 </script>
