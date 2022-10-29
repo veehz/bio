@@ -1,5 +1,5 @@
 {
-  "name": "biologyrevision",
+  "name": "bio",
   "version": "1.0.0",
   "description": "Biology Revision",
   "scripts": {
@@ -18,13 +18,17 @@
   "bugs": {
     "url": "https://github.com/veehz/bio/issues"
   },
-  "homepage": "https://github.com/veehz/bio#readme",
+  "subpage": "bio",
+  "homepage": "https://veehz.github.io/bio/",
   "dependencies": {
-    "concurrently": "^7.4.0",
-    "gh-pages": "^4.0.0",
     "html-minifier-terser": "^7.0.0",
     "katex": "^0.16.2",
-    "live-server": "^1.2.2",
-    "preprocess": "^3.2.0"
+    "preprocess": "^3.2.0",
+    "sitemap": "^7.1.1"
+  },
+  "devDependencies": {
+    "@compodoc/live-server": "^1.2.3",
+    "concurrently": "^7.5.0",
+    "gh-pages": "^4.0.0"
   }
 }

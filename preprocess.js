@@ -27,6 +27,8 @@ exclude = exclude.map((e) => path.join(SOURCE, e));
 const katex = require("katex");
 require("katex/contrib/mhchem");
 
+const all_index_files = [];
+
 // recursively process all files in SOURCE and output to DESTINATION
 
 const fs = require("fs");
@@ -36,6 +38,11 @@ async function processFile(file) {
   }
   if (file.includes("__includes")) {
     return;
+  }
+  if (file.includes("index.html")) {
+    all_index_files.push(
+      path.relative(SOURCE, file.substring(0, file.lastIndexOf("/")))
+    );
   }
 
   const processedTypes = [".html", ".js", ".css", ".svg"];
@@ -139,12 +146,13 @@ async function processFile(file) {
     processed = processed.replace("<!-- @prerender_katex -->", "");
     // regex search for /\\\((.*)\\\)/gm and replace with katex
     const replace = {
+      "&lt;": "<",
       "&gt;": ">",
       "->": String.raw`}\ \allowbreak \ce{->`,
     };
     processed = processed.replace(/\\\(([\s\S]*?)\\\)/gm, (match, p1) => {
       for (let key in replace) {
-        p1 = p1.replace(key, replace[key]);
+        p1 = p1.replaceAll(key, replace[key]);
       }
       try {
         return katex.renderToString(p1);
@@ -156,7 +164,7 @@ async function processFile(file) {
     // display math
     processed = processed.replace(/\\\[([\s\S]*?)\\\]/gm, (match, p1) => {
       for (let key in replace) {
-        p1 = p1.replace(key, replace[key]);
+        p1 = p1.replaceAll(key, replace[key]);
       }
       try {
         return katex.renderToString(p1, {
@@ -195,7 +203,9 @@ async function processFile(file) {
       removeComments: true,
       minifyCSS: true,
       minifyJS: true,
-      removeAttributeQuotes: true,
+      minifyURLs: true,
+      sortAttributes: true,
+      sortClassName: true,
     });
     console.log("Minified " + dest);
   }
@@ -231,6 +241,31 @@ function processDir(dir) {
 fs.mkdir(DEST, { recursive: true }, async (err) => {
   if (err) throw err;
   await processDir(SOURCE);
+  if (options.production) {
+    const { SitemapStream, streamToPromise } = require("sitemap");
+    const { Readable } = require("stream");
+
+    // An array with your links
+    const name = require("./package.json").subpage;
+    const links = all_index_files.map((f) => {
+      return {
+        url: path.normalize(path.join(name, f, "/")),
+        changefreq: "daily",
+        priority: f == "" ? 1 : 0.8,
+      };
+    });
+
+    // Create a stream to write to
+    const stream = new SitemapStream({
+      hostname: "https://veehz.github.io/",
+    });
+
+    streamToPromise(Readable.from(links).pipe(stream)).then((data) => {
+      // write data to sitemap.xml
+      fs.writeFileSync(path.join(DEST, "sitemap.xml"), data.toString());
+      console.log(`Wrote ${DEST}/sitemap.xml`);
+    });
+  }
   copyFavicons();
 });
 
