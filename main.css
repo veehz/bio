@@ -77,3 +77,16 @@ table {
   color: black;
   text-decoration: underline;
 }
+
+/* back button */
+#backbutton {
+    position: fixed;
+    top: .25em;
+    left: .25rem;
+}
+
+@media print {
+    #backbutton {
+        display: none;
+    }
+}
