@@ -21,6 +21,7 @@
   "subpage": "bio",
   "homepage": "https://veehz.github.io/bio/",
   "dependencies": {
+    "clean-css": "^5.3.1",
     "html-minifier-terser": "^7.0.0",
     "katex": "^0.16.2",
     "preprocess": "^3.2.0",
