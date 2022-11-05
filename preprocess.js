@@ -219,7 +219,13 @@ async function processFile(file) {
 
     if (dest.endsWith(".css")) {
       const CleanCSS = require("clean-css");
-      processed = await new CleanCSS().minify(processed).styles;
+      processed = await new CleanCSS({
+        level: {
+          2: {
+            all: true,
+          },
+        },
+      }).minify(processed).styles;
       console.log("Minified " + dest);
     }
   }
