@@ -2,18 +2,22 @@
   "name": "bio",
   "version": "1.0.0",
   "description": "Biology Revision",
+  "main": "preprocess.js",
   "scripts": {
     "build": "rm -r docs & node preprocess.js --minify --prefetch",
-    "dev": "concurrently --kill-others \"cd docs && live-server --no-browser\" \"when-changed -r src node preprocess.js --development --prefetch\"",
-    "preview": "cd docs && live-server",
+    "dev": "concurrently --kill-others \"cd docs && live-server --no-browser\" \"when-changed -r src node preprocess.js --development\"",
+    "preview": "cd docs && live-server --no-browser",
     "deploy": "npm run build && node gh-pages.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/veehz/bio.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "biology",
+    "revision"
+  ],
+  "author": "veehz",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/veehz/bio/issues"

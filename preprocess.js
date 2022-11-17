@@ -193,6 +193,8 @@ async function processFile(file) {
     // [`</sentry>`, `</span></div>`],
     // [`<branch>`, `<div class="branch">`],
     // [`</branch>`, `</div>`],
+    [/<cr\s*(.*?)\s*>/gm, `<span style="color: $1">`],
+    [`</cr>`, `</span>`],
   ];
   for (let i = 0; i < replaces.length; i++) {
     processed = processed.replaceAll(replaces[i][0], replaces[i][1]);

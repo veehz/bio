@@ -80,64 +80,79 @@ table {
 
 /* back button */
 #backbutton {
-    position: fixed;
-    top: .25em;
-    left: .25rem;
+  position: fixed;
+  top: 0.25em;
+  left: 0.25rem;
 }
 
 @media print {
-    #backbutton {
-        display: none;
-    }
+  #backbutton {
+    display: none;
+  }
+}
+
+#toc {
+  border: solid 1px black;
+  padding: 2px;
+}
+#toc a {
+  text-decoration: none;
+  color: black;
+}
+#toc::before {
+    content: "目录";
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0;
 }
 
 /* back-to-top */
 #back-to-top {
-    background: #ddd;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    bottom: 20px;
-    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-    -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-    color: red;
-    cursor: pointer;
-    display: block;
-    height: 40px;
-    opacity: 1;
-    outline: 0;
-    position: fixed;
-    right: 20px;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-    -webkit-transition: bottom 0.2s, opacity 0.2s;
-    -o-transition: bottom 0.2s, opacity 0.2s;
-    -moz-transition: bottom 0.2s, opacity 0.2s;
-    transition: bottom 0.2s, opacity 0.2s;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    width: 40px;
-    z-index: 1;
+  background: #ddd;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  bottom: 20px;
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  color: red;
+  cursor: pointer;
+  display: block;
+  height: 40px;
+  opacity: 1;
+  outline: 0;
+  position: fixed;
+  right: 20px;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-transition: bottom 0.2s, opacity 0.2s;
+  -o-transition: bottom 0.2s, opacity 0.2s;
+  -moz-transition: bottom 0.2s, opacity 0.2s;
+  transition: bottom 0.2s, opacity 0.2s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 40px;
+  z-index: 1;
 }
 
 #back-to-top svg {
-    display: block;
-    fill: currentColor;
-    height: 17px;
-    margin: 12px auto 0;
-    width: 17px;
+  display: block;
+  fill: currentColor;
+  height: 17px;
+  margin: 12px auto 0;
+  width: 17px;
 }
 
 #back-to-top.hidden {
-    bottom: -40px;
-    opacity: 0;
+  bottom: -40px;
+  opacity: 0;
 }
 
 @media print {
-    #back-to-top {
-        display: none;
-    }
+  #back-to-top {
+    display: none;
+  }
 }
